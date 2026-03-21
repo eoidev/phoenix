@@ -1,15 +1,15 @@
-"use client";
+import { getSettings } from "../../sanity/queries";
+import ContactForm from "./ContactForm";
 
-import { useState } from "react";
+export default async function Contact() {
+  const s = await getSettings().catch(() => null);
 
-export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+  const email = s?.email ?? "hello@janedoe.com";
+  const linkedin = s?.linkedin ?? "https://linkedin.com";
+  const dribbble = s?.dribbble ?? "https://dribbble.com";
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Replace with actual form submission logic
-    setSubmitted(true);
-  };
+  const linkedinHandle = linkedin.replace(/\/$/, "").split("/").pop() ?? "janedoe";
+  const dribbbleHandle = dribbble.replace(/\/$/, "").split("/").pop() ?? "janedoe";
 
   return (
     <section id="contact" className="py-32 px-6 max-w-6xl mx-auto w-full">
@@ -27,93 +27,27 @@ export default function Contact() {
           </p>
 
           <div className="space-y-3">
-            <a
-              href="mailto:hello@janedoe.com"
-              className="flex items-center gap-3 text-sm text-[#1a1a1a] hover:text-[#6b7280] transition-colors group"
-            >
+            <a href={`mailto:${email}`} className="flex items-center gap-3 text-sm text-[#1a1a1a] hover:text-[#6b7280] transition-colors group">
               <span className="text-[#6b7280] group-hover:text-[#1a1a1a] transition-colors">Email</span>
               <span className="h-px flex-1 bg-[#e5e7eb]" />
-              hello@janedoe.com
+              {email}
             </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 text-sm text-[#1a1a1a] hover:text-[#6b7280] transition-colors group"
-            >
+            <a href={linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-[#1a1a1a] hover:text-[#6b7280] transition-colors group">
               <span className="text-[#6b7280] group-hover:text-[#1a1a1a] transition-colors">LinkedIn</span>
               <span className="h-px flex-1 bg-[#e5e7eb]" />
-              /in/janedoe
+              /in/{linkedinHandle}
             </a>
-            <a
-              href="https://dribbble.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 text-sm text-[#1a1a1a] hover:text-[#6b7280] transition-colors group"
-            >
+            <a href={dribbble} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-[#1a1a1a] hover:text-[#6b7280] transition-colors group">
               <span className="text-[#6b7280] group-hover:text-[#1a1a1a] transition-colors">Dribbble</span>
               <span className="h-px flex-1 bg-[#e5e7eb]" />
-              @janedoe
+              @{dribbbleHandle}
             </a>
           </div>
         </div>
 
         {/* Right — Form */}
         <div>
-          {submitted ? (
-            <div className="border border-[#e5e7eb] p-8 text-center">
-              <p className="text-lg font-light text-[#1a1a1a] mb-2">Message sent.</p>
-              <p className="text-sm text-[#6b7280]">I&apos;ll be in touch within 1–2 business days.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label htmlFor="name" className="block text-xs text-[#6b7280] mb-2 tracking-wide uppercase">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  className="w-full border border-[#e5e7eb] bg-transparent px-4 py-3 text-sm text-[#1a1a1a] placeholder:text-[#aaa] focus:outline-none focus:border-[#1a1a1a] transition-colors"
-                  placeholder="Your name"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-xs text-[#6b7280] mb-2 tracking-wide uppercase">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  className="w-full border border-[#e5e7eb] bg-transparent px-4 py-3 text-sm text-[#1a1a1a] placeholder:text-[#aaa] focus:outline-none focus:border-[#1a1a1a] transition-colors"
-                  placeholder="your@email.com"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-xs text-[#6b7280] mb-2 tracking-wide uppercase">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={5}
-                  className="w-full border border-[#e5e7eb] bg-transparent px-4 py-3 text-sm text-[#1a1a1a] placeholder:text-[#aaa] focus:outline-none focus:border-[#1a1a1a] transition-colors resize-none"
-                  placeholder="Tell me about your project..."
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-[#1a1a1a] text-white text-sm py-3.5 hover:bg-[#333] transition-colors"
-              >
-                Send message
-              </button>
-            </form>
-          )}
+          <ContactForm />
         </div>
       </div>
     </section>

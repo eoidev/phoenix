@@ -26,15 +26,19 @@ export default async function About() {
             <em className="not-italic text-[#6b7280]">not just for them.</em>
           </h2>
           <div className="space-y-4 text-[#6b7280] leading-relaxed">
-            <p>
-              I&apos;m a UI/UX designer with 6 years of experience working at the intersection of product strategy and visual design. I believe the best design is invisible — it just works.
-            </p>
-            <p>
-              Previously at Google, I led design for a suite of developer tools used by over 3 million engineers. Now I work with startups and scale-ups to build products that delight users and drive business outcomes.
-            </p>
-            <p>
-              When I&apos;m not designing, I&apos;m usually hiking somewhere with a camera, or obsessing over typography.
-            </p>
+            {s?.bio?.length ? (
+              s.bio.map((block: { _key: string; children?: { text: string }[] }) => (
+                <p key={block._key}>
+                  {block.children?.map((c) => c.text).join("") ?? ""}
+                </p>
+              ))
+            ) : (
+              <>
+                <p>I&apos;m a UI/UX designer with 6 years of experience working at the intersection of product strategy and visual design. I believe the best design is invisible — it just works.</p>
+                <p>Previously at Google, I led design for a suite of developer tools used by over 3 million engineers. Now I work with startups and scale-ups to build products that delight users and drive business outcomes.</p>
+                <p>When I&apos;m not designing, I&apos;m usually hiking somewhere with a camera, or obsessing over typography.</p>
+              </>
+            )}
           </div>
 
           <div className="mt-12">
