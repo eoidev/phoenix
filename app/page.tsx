@@ -5,11 +5,14 @@ import About from "./components/About";
 import Process from "./components/Process";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import { getSettings } from "../sanity/queries";
 
-export default function Home() {
+export default async function Home() {
+  const s = await getSettings().catch(() => null);
+
   return (
     <>
-      <Nav />
+      <Nav name={s?.name ?? "Jane Doe"} />
       <main className="flex flex-col items-center w-full">
         <Hero />
         <Work />
