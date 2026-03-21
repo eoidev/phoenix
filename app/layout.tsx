@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jane Doe — UI/UX Designer",
+  title: "Igor Slovák — UI UX Designer",
   description: "Designer crafting thoughtful digital experiences",
 };
 
