@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const links = [
   { label: "Work", href: "#work" },
@@ -9,7 +10,7 @@ const links = [
   { label: "Contact", href: "#contact" },
 ];
 
-export default function Nav({ name = "Jane Doe" }: { name?: string }) {
+export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -25,8 +26,8 @@ export default function Nav({ name = "Jane Doe" }: { name?: string }) {
       }`}
     >
       <nav className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
-        <a href="#" className="text-sm font-medium tracking-wide text-[#1a1a1a] hover:opacity-60 transition-opacity">
-          {name}
+        <a href="#" className="hover:opacity-60 transition-opacity">
+          <Image src="/eoi-logo.svg" alt="EOI" width={48} height={30} />
         </a>
         <ul className="flex items-center gap-8">
           {links.map((link) => (
