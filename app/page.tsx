@@ -14,7 +14,7 @@ export default async function Home() {
 
   return (
     <>
-      <Nav name={s?.name ?? "Jane Doe"} />
+      <Nav />
       <main className="flex flex-col items-center w-full">
         <Hero />
         <Work />
