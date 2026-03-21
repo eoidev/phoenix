@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import Work from "./components/Work";
