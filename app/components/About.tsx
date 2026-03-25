@@ -55,12 +55,14 @@ export default async function About() {
 
         {/* Right */}
         <div>
-          <div className="w-full aspect-[3/4] bg-[#f0ede8] mb-10 relative overflow-hidden flex items-center justify-center">
-            {s?.photoUrl ? (
-              <Image src={s.photoUrl} alt={s.name ?? "Photo"} fill className="object-cover" />
-            ) : (
-              <span className="text-[#1a1a1a]/10 text-sm">Photo</span>
-            )}
+          <div className="flex justify-center mb-10">
+            <div className="w-64 h-64 rounded-full relative overflow-hidden bg-[#f0ede8] flex items-center justify-center">
+              {s?.photoUrl ? (
+                <Image src={s.photoUrl} alt={s.name ?? "Photo"} fill className="object-cover" />
+              ) : (
+                <span className="text-[#1a1a1a]/10 text-sm">Photo</span>
+              )}
+            </div>
           </div>
 
           <div>
