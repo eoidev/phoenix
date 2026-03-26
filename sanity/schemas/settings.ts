@@ -6,7 +6,8 @@ export const settings = defineType({
   type: "document",
   fields: [
     defineField({ name: "name", title: "Your Name", type: "string" }),
-    defineField({ name: "role", title: "Role / Title", type: "string", description: 'e.g. "UI/UX Designer"' }),
+    defineField({ name: "role", title: "Role / Title", type: "string", description: 'e.g. "Product Designer"' }),
+    defineField({ name: "availability", title: "Availability", type: "string", description: 'e.g. "Available for work"' }),
     defineField({ name: "tagline", title: "Hero Tagline", type: "string" }),
     defineField({ name: "bio", title: "Bio", type: "array", of: [{ type: "block" }] }),
     defineField({

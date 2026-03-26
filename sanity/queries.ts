@@ -18,6 +18,7 @@ export async function getSettings() {
     `*[_type == "settings"][0] {
       name,
       role,
+      availability,
       tagline,
       bio,
       skills,

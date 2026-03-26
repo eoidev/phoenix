@@ -3,14 +3,15 @@ import { getSettings } from "../../sanity/queries";
 export default async function Hero() {
   const s = await getSettings().catch(() => null);
 
-  const role = s?.role ?? "UI/UX Designer";
+  const role = s?.role ?? "Product Designer";
+  const availability = s?.availability ?? "Available for work";
   const tagline = s?.tagline ?? "I help companies craft digital products people actually enjoy using — through research, thoughtful design, and obsessive attention to detail.";
 
   return (
     <section className="min-h-screen flex flex-col justify-end pb-24 px-6 max-w-6xl mx-auto w-full">
       <div className="max-w-3xl">
         <p className="text-sm text-[#6b7280] tracking-widest uppercase mb-6">
-          {role} — Available for work
+          {role} — {availability}
         </p>
         <h1 className="text-6xl sm:text-7xl md:text-8xl font-light leading-[1.05] tracking-tight text-[#1a1a1a] mb-8">
           Designing
