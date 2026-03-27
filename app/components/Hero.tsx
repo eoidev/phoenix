@@ -10,7 +10,7 @@ export default async function Hero() {
   return (
     <section className="min-h-screen flex flex-col justify-end pb-24 px-6 max-w-6xl mx-auto w-full">
       <div className="max-w-3xl">
-        <p className="text-sm text-[#6b7280] tracking-widest uppercase mb-6">
+        <p className="text-xs text-[#6b7280] tracking-widest uppercase mb-6">
           {role} — {availability}
         </p>
         <h1 className="text-6xl sm:text-7xl md:text-8xl font-light leading-[1.05] tracking-tight text-[#1a1a1a] mb-8">
@@ -20,7 +20,7 @@ export default async function Hero() {
           <br />
           experiences
         </h1>
-        <p className="text-lg text-[#6b7280] max-w-md leading-relaxed mb-10">
+        <p className="text-lg text-[#1a1a1a] max-w-md leading-relaxed mb-10">
           {tagline}
         </p>
         <div className="flex items-center gap-6">

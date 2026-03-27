@@ -22,7 +22,7 @@ export default function Nav() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-[#fafaf9]/90 backdrop-blur-md border-b border-[#e5e7eb]" : ""
+        scrolled ? "bg-[#f5f5f7]/90 backdrop-blur-md border-b border-[#e5e7eb]" : ""
       }`}
     >
       <nav className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
@@ -34,7 +34,7 @@ export default function Nav() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-sm text-[#6b7280] hover:text-[#1a1a1a] transition-colors"
+                className="text-sm text-[#1a1a1a] hover:text-[#6b7280] transition-colors"
               >
                 {link.label}
               </a>

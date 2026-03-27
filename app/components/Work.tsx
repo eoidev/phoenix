@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getProjects } from "../../sanity/queries";
 
-const fallbackBg = ["#f0ede8", "#e8ede8", "#e8ecf0", "#f0ece8"];
+const fallbackBg = ["#f5f5f7", "#f5f5f7", "#f5f5f7", "#f5f5f7"];
 
 const fallbackProjects = [
   {
@@ -83,15 +83,7 @@ export default async function Work() {
                 </p>
               </div>
               <div className="shrink-0 w-8 h-8 rounded-full border border-[#e5e7eb] flex items-center justify-center group-hover:bg-[#1a1a1a] group-hover:border-[#1a1a1a] transition-all mt-1">
-                <svg
-                  className="group-hover:stroke-white transition-colors"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                >
-                  <path d="M1 7H13M7 1L13 7L7 13" stroke="#6b7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <span className="text-xs text-[#1a1a1a] group-hover:text-white transition-colors">↗</span>
               </div>
             </div>
 
