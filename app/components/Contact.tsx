@@ -1,5 +1,6 @@
 import { getSettings } from "../../sanity/queries";
 import ContactForm from "./ContactForm";
+import FadeUp from "./FadeUp";
 
 export default async function Contact() {
   const s = await getSettings().catch(() => null);
@@ -15,6 +16,7 @@ export default async function Contact() {
     <section id="contact" className="py-32 px-6 max-w-6xl mx-auto w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
         {/* Left */}
+        <FadeUp>
         <div>
           <p className="text-xs text-[#6b7280] tracking-widests uppercase mb-4">Contact</p>
           <h2 className="text-4xl font-light text-[#1a1a1a] leading-snug mb-6">
@@ -44,11 +46,14 @@ export default async function Contact() {
             </a>
           </div>
         </div>
+        </FadeUp>
 
         {/* Right — Form */}
+        <FadeUp delay={150}>
         <div>
           <ContactForm />
         </div>
+        </FadeUp>
       </div>
     </section>
   );

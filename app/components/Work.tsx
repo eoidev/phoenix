@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getProjects } from "../../sanity/queries";
+import FadeUp from "./FadeUp";
 
 const fallbackBg = ["#f5f5f7", "#f5f5f7", "#f5f5f7", "#f5f5f7"];
 
@@ -44,14 +45,17 @@ export default async function Work() {
 
   return (
     <section id="work" className="py-32 px-6 max-w-6xl mx-auto w-full">
-      <div className="flex items-end justify-between mb-16 border-b border-[#e5e7eb] pb-6">
-        <h2 className="text-3xl font-light text-[#1a1a1a]">Selected Work</h2>
-        <span className="text-sm text-[#6b7280]">{projects.length} projects</span>
-      </div>
+      <FadeUp>
+        <div className="flex items-end justify-between mb-16 border-b border-[#e5e7eb] pb-6">
+          <h2 className="text-3xl font-light text-[#1a1a1a]">Selected Work</h2>
+          <span className="text-sm text-[#6b7280]">{projects.length} projects</span>
+        </div>
+      </FadeUp>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map((project: typeof fallbackProjects[0], i: number) => (
-          <article key={project._id} className="group cursor-pointer">
+          <FadeUp key={project._id} delay={i * 100}>
+          <article className="group cursor-pointer">
             <div
               className="w-full aspect-[4/3] mb-5 overflow-hidden relative transition-transform duration-500 group-hover:scale-[0.99]"
               style={{ backgroundColor: fallbackBg[i % fallbackBg.length] }}
@@ -95,6 +99,7 @@ export default async function Work() {
               ))}
             </div>
           </article>
+          </FadeUp>
         ))}
       </div>
     </section>

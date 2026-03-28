@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getSettings } from "../../sanity/queries";
+import FadeUp from "./FadeUp";
 
 const fallbackSkills = [
   "User Research", "Information Architecture", "Interaction Design",
@@ -17,6 +18,7 @@ export default async function About() {
   return (
     <section id="about" className="py-32 px-6 max-w-6xl mx-auto w-full">
       {/* 2-col, 4-row grid */}
+      <FadeUp>
       <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:grid-rows-[repeat(4,fit-content(100%))] md:gap-[35px]">
 
         {/* Row 1 — label, col 1 only */}
@@ -71,8 +73,10 @@ export default async function About() {
           </div>
         </div>
       </div>
+      </FadeUp>
 
       {/* Clients — below grid, full width */}
+      <FadeUp delay={200}>
       <div className="mt-16">
         <p className="text-xs text-[#6b7280] tracking-widest uppercase mb-4">Clients & Companies</p>
         <div className="flex flex-wrap gap-3">
@@ -83,6 +87,7 @@ export default async function About() {
           ))}
         </div>
       </div>
+      </FadeUp>
     </section>
   );
 }

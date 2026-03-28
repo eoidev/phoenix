@@ -1,3 +1,5 @@
+import FadeUp from "./FadeUp";
+
 const steps = [
   {
     number: "01",
@@ -28,14 +30,17 @@ const steps = [
 export default function Process() {
   return (
     <section id="process" className="py-32 px-6 max-w-6xl mx-auto w-full">
-      <div className="border-b border-[#e5e7eb] pb-6 mb-16">
-        <p className="text-xs text-[#6b7280] tracking-widest uppercase mb-2">How I Work</p>
-        <h2 className="text-3xl font-light text-[#1a1a1a]">My Process</h2>
-      </div>
+      <FadeUp>
+        <div className="border-b border-[#e5e7eb] pb-6 mb-16">
+          <p className="text-xs text-[#6b7280] tracking-widest uppercase mb-2">How I Work</p>
+          <h2 className="text-3xl font-light text-[#1a1a1a]">My Process</h2>
+        </div>
+      </FadeUp>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {steps.map((step, i) => (
-          <div key={step.number} className="relative">
+          <FadeUp key={step.number} delay={i * 100}>
+          <div className="relative">
             {/* Connector line */}
             {i < steps.length - 1 && (
               <div className="hidden md:block absolute top-[10px] left-[calc(100%+1rem)] right-0 h-px bg-[#e5e7eb] w-8" />
@@ -44,6 +49,7 @@ export default function Process() {
             <h3 className="text-lg font-medium text-[#1a1a1a] mb-3">{step.title}</h3>
             <p className="text-sm text-[#6b7280] leading-relaxed">{step.description}</p>
           </div>
+          </FadeUp>
         ))}
       </div>
     </section>
