@@ -75,7 +75,7 @@ export default async function Work() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-xs text-[#6b7280] mb-1">{project.category}</p>
-                <h3 className="text-lg font-medium text-[#1a1a1a] group-hover:opacity-60 transition-opacity">
+                <h3 className="text-lg font-semibold text-[#1a1a1a] group-hover:opacity-60 transition-opacity">
                   {project.title}
                 </h3>
                 <p className="text-sm text-[#6b7280] mt-2 leading-relaxed max-w-sm">

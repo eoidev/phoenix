@@ -33,7 +33,7 @@ export default async function About() {
 
         {/* Row 3 — photo (col 1) + bio (col 2) */}
         <div className="md:col-start-1 md:row-start-3 flex md:justify-end">
-          <div className="w-[181px] h-[268px] relative overflow-hidden bg-[#f0ede8] flex items-center justify-center">
+          <div className="w-[200px] h-[268px] relative overflow-hidden bg-[#f0ede8] flex items-center justify-center">
             {s?.photoUrl ? (
               <Image src={s.photoUrl} alt={s.name ?? "Photo"} fill className="object-cover" />
             ) : (

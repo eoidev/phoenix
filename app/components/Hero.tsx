@@ -1,4 +1,5 @@
 import { getSettings } from "../../sanity/queries";
+import GradientBackground from "./GradientBackground";
 
 export default async function Hero() {
   const s = await getSettings().catch(() => null);
@@ -8,7 +9,9 @@ export default async function Hero() {
   const tagline = s?.tagline ?? "I help companies craft digital products people actually enjoy using — through research, thoughtful design, and obsessive attention to detail.";
 
   return (
-    <section className="min-h-screen flex flex-col justify-end pb-24 px-6 max-w-6xl mx-auto w-full">
+    <section className="relative min-h-screen flex flex-col justify-end pb-24 px-6 w-full overflow-hidden">
+      <GradientBackground />
+      <div className="relative z-10 max-w-6xl mx-auto w-full">
       <div className="max-w-3xl">
         <p className="text-xs text-[#6b7280] tracking-widest uppercase mb-6">
           {role} — {availability}
@@ -40,6 +43,7 @@ export default async function Hero() {
             Get in touch
           </a>
         </div>
+      </div>
       </div>
     </section>
   );
