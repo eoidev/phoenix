@@ -1,13 +1,24 @@
 import { getSettings } from "../../sanity/queries";
 import GradientBackground from "./GradientBackground";
 import HeroContent from "./HeroContent";
+import { PortableText } from "@portabletext/react";
+
+const taglineComponents = {
+  block: ({ children }: { children: React.ReactNode }) => (
+    <p className="text-lg text-white max-w-md leading-relaxed">{children}</p>
+  ),
+  marks: {
+    strong: ({ children }: { children: React.ReactNode }) => <strong className="font-semibold">{children}</strong>,
+    em: ({ children }: { children: React.ReactNode }) => <em className="italic">{children}</em>,
+  },
+};
 
 export default async function Hero() {
   const s = await getSettings().catch(() => null);
 
   const role = s?.role ?? "Product Designer";
   const availability = s?.availability ?? "Available for work";
-  const tagline = s?.tagline ?? "I help companies craft digital products people actually enjoy using — through research, thoughtful design, and obsessive attention to detail.";
+  const tagline = s?.tagline;
 
   return (
     <section className="relative min-h-screen flex flex-col justify-end pb-24 px-6 w-full overflow-hidden">
@@ -24,9 +35,15 @@ export default async function Hero() {
             <br />
             experiences
           </h1>
-          <p className="text-lg text-white max-w-md leading-relaxed mb-10">
-            {tagline}
-          </p>
+          <div className="mb-10">
+            {tagline?.length ? (
+              <PortableText value={tagline} components={taglineComponents} />
+            ) : (
+              <p className="text-lg text-white max-w-md leading-relaxed">
+                Hello, I&apos;m Igor Slovák, product designer crafting user-centered experiences.
+              </p>
+            )}
+          </div>
           <div className="flex items-center gap-6">
             <a
               href="#work"
