@@ -1,15 +1,17 @@
 import { getSettings } from "../../sanity/queries";
 import GradientBackground from "./GradientBackground";
 import HeroContent from "./HeroContent";
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextComponents } from "@portabletext/react";
 
-const taglineComponents = {
-  block: ({ children }: { children: React.ReactNode }) => (
-    <p className="text-lg text-white max-w-md leading-relaxed">{children}</p>
-  ),
+const taglineComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => (
+      <p className="text-lg text-white max-w-md leading-relaxed">{children}</p>
+    ),
+  },
   marks: {
-    strong: ({ children }: { children: React.ReactNode }) => <strong className="font-semibold">{children}</strong>,
-    em: ({ children }: { children: React.ReactNode }) => <em className="italic">{children}</em>,
+    strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+    em: ({ children }) => <em className="italic">{children}</em>,
   },
 };
 
