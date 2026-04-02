@@ -1,8 +1,16 @@
 import { client } from "./client";
 
+function withTimeout<T>(promise: Promise<T>, ms = 5000): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error("timeout")), ms)),
+  ]);
+}
+
 export async function getProjects() {
-  return client.fetch(
-    `*[_type == "project"] | order(order asc) {
+  return withTimeout(
+    client.fetch(
+      `*[_type == "project"] | order(order asc) {
       _id,
       title,
       category,
@@ -10,23 +18,26 @@ export async function getProjects() {
       tags,
       "imageUrl": image.asset->url
     }`
+    )
   );
 }
 
 export async function getSettings() {
-  return client.fetch(
-    `*[_type == "settings"][0] {
+  return withTimeout(
+    client.fetch(
+      `*[_type == "settings"][0] {
       name,
       role,
       availability,
       tagline,
       bio,
       skills,
-      clients,
+      "clients": clients[] { name, "logoUrl": logo.asset->url },
       email,
       linkedin,
       dribbble,
       "photoUrl": photo.asset->url
     }`
+    )
   );
 }

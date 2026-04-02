@@ -7,13 +7,17 @@ const fallbackSkills = [
   "Visual Design", "Prototyping", "Usability Testing",
   "Design Systems", "Figma", "UX Writing", "Motion Design",
 ];
-const fallbackClients = ["Stripe", "Linear", "Notion", "Vercel", "Loom"];
+const fallbackClients = [
+  { name: "Stripe" }, { name: "Linear" }, { name: "Notion" },
+  { name: "Vercel" }, { name: "Loom" },
+];
 
 export default async function About() {
   const s = await getSettings().catch(() => null);
 
   const skills = s?.skills?.length ? s.skills : fallbackSkills;
-  const clients = s?.clients?.length ? s.clients : fallbackClients;
+  const rawClients = s?.clients?.length ? s.clients : fallbackClients;
+  const clients = rawClients.filter((c: { name: string; logoUrl?: string } | null) => c !== null);
 
   return (
     <section id="about" className="py-32 px-6 max-w-6xl mx-auto w-full">
@@ -77,13 +81,23 @@ export default async function About() {
 
       {/* Clients — below grid, full width */}
       <FadeUp delay={200}>
-      <div className="mt-16">
-        <p className="text-xs text-[#6b7280] tracking-widest uppercase mb-4">Clients & Companies</p>
-        <div className="flex flex-wrap gap-3">
-          {clients.map((client: string) => (
-            <span key={client} className="text-sm font-medium text-[#1a1a1a] border border-[#e5eaeb] px-4 py-2">
-              {client}
-            </span>
+      <div className="mt-[200px]">
+        <p className="text-xs text-[#6b7280] tracking-[1.2px] uppercase mb-10">Clients & Companies</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          {clients.map((client: { name: string; logoUrl?: string }) => (
+            <div key={client.name} className="h-[208px] bg-[#fafaf9] flex items-center justify-center">
+              {client.logoUrl ? (
+                <Image
+                  src={client.logoUrl}
+                  alt={client.name}
+                  width={108}
+                  height={34}
+                  className="object-contain"
+                />
+              ) : (
+                <span className="text-sm text-[#1a1a1a]">{client.name}</span>
+              )}
+            </div>
           ))}
         </div>
       </div>

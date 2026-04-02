@@ -36,7 +36,23 @@ export const settings = defineType({
       name: "clients",
       title: "Clients / Companies",
       type: "array",
-      of: [{ type: "string" }],
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "name", title: "Name", type: "string" }),
+            defineField({
+              name: "logo",
+              title: "Logo",
+              type: "image",
+              options: { hotspot: false },
+            }),
+          ],
+          preview: {
+            select: { title: "name", media: "logo" },
+          },
+        },
+      ],
     }),
     defineField({ name: "email", title: "Email", type: "string" }),
     defineField({ name: "linkedin", title: "LinkedIn URL", type: "url" }),
