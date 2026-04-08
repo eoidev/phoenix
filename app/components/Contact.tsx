@@ -25,7 +25,7 @@ export default async function Contact() {
             <em className="not-italic text-[#6b7280]">worth using.</em>
           </h2>
           <p className="text-[#6b7280] leading-relaxed max-w-sm">
-            I&apos;m open to freelance projects, full-time roles, and long-term collaborations. Reach out and let&apos;s talk.
+            I&apos;m currently in a full-time role and not actively looking for freelance or new opportunities — but interesting conversations are always welcome. Feel free to reach out.
           </p>
         </FadeUp>
 
