@@ -37,7 +37,12 @@ export async function getProjectBySlug(slug: string) {
       category,
       description,
       tags,
-      "imageUrl": image.asset->url
+      "imageUrl": image.asset->url,
+      role,
+      opportunities,
+      approach,
+      impact,
+      reflection
     }`,
       { slug }
     )
