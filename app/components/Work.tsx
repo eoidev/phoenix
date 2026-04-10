@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getProjects } from "../../sanity/queries";
 
 const fallbackBg = ["#f0ede8", "#e8ede8", "#e8ecf0", "#f0ece8"];
@@ -51,7 +52,8 @@ export default async function Work() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map((project: typeof fallbackProjects[0], i: number) => (
-          <article key={project._id} className="group cursor-pointer">
+          <article key={project._id} className="group cursor-pointer relative">
+          {project.slug && <Link href={`/work/${project.slug}`} className="absolute inset-0 z-10" aria-label={project.title} />}
             <div
               className="w-full aspect-[4/3] mb-5 overflow-hidden relative transition-transform duration-500 group-hover:scale-[0.99]"
               style={{ backgroundColor: fallbackBg[i % fallbackBg.length] }}

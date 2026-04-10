@@ -8,6 +8,7 @@ export async function getProjects() {
       category,
       description,
       tags,
+      "slug": slug.current,
       "imageUrl": image.asset->url
     }`
   );
