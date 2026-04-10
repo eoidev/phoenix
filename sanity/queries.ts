@@ -1,5 +1,7 @@
 import { client } from "./client";
 
+const sanityConfigured = !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+
 function withTimeout<T>(promise: Promise<T>, ms = 5000): Promise<T> {
   return Promise.race([
     promise,
@@ -8,6 +10,7 @@ function withTimeout<T>(promise: Promise<T>, ms = 5000): Promise<T> {
 }
 
 export async function getProjects() {
+  if (!sanityConfigured) return [];
   return withTimeout(
     client.fetch(
       `*[_type == "project"] | order(order asc) {
@@ -24,6 +27,7 @@ export async function getProjects() {
 }
 
 export async function getProjectBySlug(slug: string) {
+  if (!sanityConfigured) return null;
   return withTimeout(
     client.fetch(
       `*[_type == "project" && slug.current == $slug][0] {
@@ -41,6 +45,7 @@ export async function getProjectBySlug(slug: string) {
 }
 
 export async function getSettings() {
+  if (!sanityConfigured) return null;
   return withTimeout(
     client.fetch(
       `*[_type == "settings"][0] {
