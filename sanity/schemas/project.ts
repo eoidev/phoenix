@@ -42,20 +42,13 @@ export const project = defineType({
       options: { hotspot: true },
     }),
     defineField({
-      name: "slug",
-      title: "Page Slug",
-      type: "slug",
-      description: 'URL path for the project page (e.g. "tootoot" → /work/tootoot)',
-      options: { source: "title" },
-    }),
-    defineField({
       name: "order",
       title: "Order",
       type: "number",
       description: "Lower number = shown first",
     }),
 
-    // ── Case study sections ──────────────────────────────────────────────────
+    // ── Case study sections ─────────────────────────────────────────────────
     defineField({
       name: "role",
       title: "My Role",
