@@ -13,11 +13,29 @@ export async function getProjects() {
       `*[_type == "project"] | order(order asc) {
       _id,
       title,
+      "slug": slug.current,
       category,
       description,
       tags,
       "imageUrl": image.asset->url
     }`
+    )
+  );
+}
+
+export async function getProjectBySlug(slug: string) {
+  return withTimeout(
+    client.fetch(
+      `*[_type == "project" && slug.current == $slug][0] {
+      _id,
+      title,
+      "slug": slug.current,
+      category,
+      description,
+      tags,
+      "imageUrl": image.asset->url
+    }`,
+      { slug }
     )
   );
 }
