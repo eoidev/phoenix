@@ -22,14 +22,15 @@ type CardItem = { key: string; body: string };
 
 // ─── Block helpers ─────────────────────────────────────────────────────────────
 
+function blockText(b: Block): string {
+  return (b.children ?? []).map((c) => c.text ?? "").join("");
+}
+
 function extractBullets(blocks: Block[] | null | undefined): CardItem[] {
   if (!blocks) return [];
   return blocks
     .filter((b) => b.listItem === "bullet")
-    .map((b) => ({
-      key: b._key,
-      body: b.children?.map((c) => c.text).join("") ?? "",
-    }))
+    .map((b) => ({ key: b._key, body: blockText(b) }))
     .filter((i) => i.body);
 }
 
@@ -37,7 +38,7 @@ function extractParagraphs(blocks: Block[] | null | undefined): string[] {
   if (!blocks) return [];
   return blocks
     .filter((b) => !b.listItem)
-    .map((b) => b.children?.map((c) => c.text).join("") ?? "")
+    .map((b) => blockText(b))
     .filter(Boolean);
 }
 
@@ -176,7 +177,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
                   {description}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {tags.map((tag) => (
+                  {(tags || []).map((tag) => (
                     <span
                       key={tag}
                       className="text-xs text-[#6b7280] border border-[#e5eaeb] px-3 py-1.5"
@@ -232,7 +233,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
                 My Role
               </p>
               <div className="space-y-4 max-w-2xl">
-                {roleParagraphs.map((par, i) => (
+                {(roleParagraphs || []).map((par, i) => (
                   <p key={i} className="text-[#1a1a1a] leading-relaxed">
                     {par}
                   </p>
@@ -262,7 +263,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
             </FadeUp>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {opportunitiesCards.map((item, i) => (
+              {(opportunitiesCards || []).map((item, i) => (
                 <FadeUp key={item.key} delay={i * 70}>
                   <div className="bg-[#fafaf9] p-7 h-full flex flex-col gap-5">
                     <span className="text-xs text-[#6b7280] font-mono tracking-wider">
@@ -312,7 +313,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
             </FadeUp>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {approachItems.map((item, i) => (
+              {(approachItems || []).map((item, i) => (
                 <FadeUp key={item._key} delay={i * 70}>
                   <div className="bg-[#fafaf9] p-7 h-full flex flex-col gap-4">
                     <span className="text-xs text-[#6b7280] font-mono tracking-wider">
@@ -351,7 +352,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
             </FadeUp>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {impactCards.map((item, i) => (
+              {(impactCards || []).map((item, i) => (
                 <FadeUp key={item.key} delay={i * 70}>
                   <div className="bg-[#fafaf9] p-8 h-full flex flex-col gap-5">
                     <span className="text-xs text-[#6b7280] font-mono tracking-wider">
