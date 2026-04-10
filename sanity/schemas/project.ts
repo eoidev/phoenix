@@ -12,6 +12,12 @@ export const project = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: { source: "title", maxLength: 96 },
+    }),
+    defineField({
       name: "category",
       title: "Category",
       type: "string",
@@ -47,6 +53,52 @@ export const project = defineType({
       title: "Order",
       type: "number",
       description: "Lower number = shown first",
+    }),
+
+    // ── Case study sections ──────────────────────────────────────────────────
+    defineField({
+      name: "role",
+      title: "My Role",
+      type: "array",
+      of: [{ type: "block" }],
+      description: "Describe your role on this project",
+    }),
+    defineField({
+      name: "opportunities",
+      title: "Opportunities & Challenges",
+      type: "array",
+      of: [{ type: "block" }],
+      description: "Use bullet lists for opportunities and challenges",
+    }),
+    defineField({
+      name: "approach",
+      title: "Approach",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "approachItem",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "string" }),
+            defineField({ name: "body", title: "Body", type: "text", rows: 3 }),
+          ],
+          preview: { select: { title: "title" } },
+        },
+      ],
+      description: "Each item has a title and a description",
+    }),
+    defineField({
+      name: "impact",
+      title: "Impact & Outcomes",
+      type: "array",
+      of: [{ type: "block" }],
+      description: "Use bullet lists for outcomes",
+    }),
+    defineField({
+      name: "reflection",
+      title: "Reflection",
+      type: "array",
+      of: [{ type: "block" }],
     }),
   ],
   orderings: [{ title: "Order", name: "orderAsc", by: [{ field: "order", direction: "asc" }] }],

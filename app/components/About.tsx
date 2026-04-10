@@ -1,80 +1,107 @@
 import Image from "next/image";
 import { getSettings } from "../../sanity/queries";
+import FadeUp from "./FadeUp";
 
 const fallbackSkills = [
   "User Research", "Information Architecture", "Interaction Design",
   "Visual Design", "Prototyping", "Usability Testing",
   "Design Systems", "Figma", "UX Writing", "Motion Design",
 ];
-const fallbackClients = ["Stripe", "Linear", "Notion", "Vercel", "Loom"];
+const fallbackClients = [
+  { name: "Stripe" }, { name: "Linear" }, { name: "Notion" },
+  { name: "Vercel" }, { name: "Loom" },
+];
 
 export default async function About() {
   const s = await getSettings().catch(() => null);
 
   const skills = s?.skills?.length ? s.skills : fallbackSkills;
-  const clients = s?.clients?.length ? s.clients : fallbackClients;
+  const rawClients = s?.clients?.length ? s.clients : fallbackClients;
+  const clients = rawClients.filter((c: { name: string; logoUrl?: string } | null) => c !== null);
 
   return (
     <section id="about" className="py-32 px-6 max-w-6xl mx-auto w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-        {/* Left */}
-        <div>
-          <p className="text-xs text-[#6b7280] tracking-widest uppercase mb-6">About</p>
-          <h2 className="text-4xl font-light text-[#1a1a1a] leading-snug mb-8">
-            I design with people,
-            <br />
-            <em className="not-italic text-[#6b7280]">not just for them.</em>
-          </h2>
-          <div className="space-y-4 text-[#6b7280] leading-relaxed">
-            {s?.bio?.length ? (
-              s.bio.map((block: { _key: string; children?: { text: string }[] }) => (
-                <p key={block._key}>
-                  {block.children?.map((c) => c.text).join("") ?? ""}
-                </p>
-              ))
-            ) : (
-              <>
-                <p>I&apos;m a UI/UX designer with 6 years of experience working at the intersection of product strategy and visual design. I believe the best design is invisible — it just works.</p>
-                <p>Previously at Google, I led design for a suite of developer tools used by over 3 million engineers. Now I work with startups and scale-ups to build products that delight users and drive business outcomes.</p>
-                <p>When I&apos;m not designing, I&apos;m usually hiking somewhere with a camera, or obsessing over typography.</p>
-              </>
-            )}
-          </div>
+      {/* 2-col, 4-row grid */}
+      <FadeUp>
+      <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:grid-rows-[repeat(4,fit-content(100%))] md:gap-[35px]">
 
-          <div className="mt-12">
-            <p className="text-xs text-[#6b7280] tracking-widest uppercase mb-4">Clients & Companies</p>
-            <div className="flex flex-wrap gap-3">
-              {clients.map((client: string) => (
-                <span key={client} className="text-sm font-medium text-[#1a1a1a] border border-[#e5e7eb] px-4 py-2">
-                  {client}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* Row 1 — label, col 1 only */}
+        <p className="md:col-start-1 md:row-start-1 text-xs text-[#6b7280] tracking-widest uppercase">
+          About
+        </p>
 
-        {/* Right */}
-        <div>
-          <div className="w-full aspect-[3/4] bg-[#f0ede8] mb-10 relative overflow-hidden flex items-center justify-center">
+        {/* Row 2 — heading, col 1 only */}
+        <h2 className="md:col-start-1 md:row-start-2 text-4xl font-light text-[#1a1a1a] leading-snug">
+          I design with people,
+          <br />
+          <em className="not-italic text-[#6b7280]">not just for them.</em>
+        </h2>
+
+        {/* Row 3 — photo (col 1) + bio (col 2) */}
+        <div className="md:col-start-1 md:row-start-3 flex md:justify-end">
+          <div className="w-[200px] h-[268px] relative overflow-hidden bg-[#f0ede8] flex items-center justify-center">
             {s?.photoUrl ? (
               <Image src={s.photoUrl} alt={s.name ?? "Photo"} fill className="object-cover" />
             ) : (
               <span className="text-[#1a1a1a]/10 text-sm">Photo</span>
             )}
-          </div>
 
-          <div>
-            <p className="text-xs text-[#6b7280] tracking-widest uppercase mb-4">Skills</p>
-            <div className="flex flex-wrap gap-2">
-              {skills.map((skill: string) => (
-                <span key={skill} className="text-sm text-[#6b7280] border border-[#e5e7eb] px-3 py-1.5">
-                  {skill}
-                </span>
-              ))}
-            </div>
+          </div>
+        </div>
+
+        <div className="md:col-start-2 md:row-start-3 space-y-4 text-[#1a1a1a] leading-relaxed md:pr-16">
+          {s?.bio?.length ? (
+            s.bio.map((block: { _key: string; children?: { text: string }[] }) => (
+              <p key={block._key}>
+                {block.children?.map((c) => c.text).join("") ?? ""}
+              </p>
+            ))
+          ) : (
+            <>
+              <p>My name is Igor Slovák.</p>
+              <p>I&apos;m a freelance graphic designer with focus on branding and interactive design.</p>
+              <p>I help startups to growth and established companies to redefine their brands and to launch their products.</p>
+            </>
+          )}
+        </div>
+
+        {/* Row 4 — skills, col 2 only */}
+        <div className="md:col-start-2 md:row-start-4">
+          <p className="text-xs text-[#6b7280] tracking-widest uppercase mb-4">Skills</p>
+          <div className="flex flex-wrap gap-2">
+            {skills.map((skill: string) => (
+              <span key={skill} className="text-sm text-[#6b7280] border border-[#e5eaeb] px-3 py-1.5">
+                {skill}
+              </span>
+            ))}
           </div>
         </div>
       </div>
+      </FadeUp>
+
+      {/* Clients — below grid, full width */}
+      <FadeUp delay={200}>
+      <div className="mt-[200px]">
+        <p className="text-xs text-[#6b7280] tracking-[1.2px] uppercase mb-10">Clients & Companies</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          {clients.map((client: { name: string; logoUrl?: string }) => (
+            <div key={client.name} className="h-[208px] bg-[#fafaf9] flex items-center justify-center">
+              {client.logoUrl ? (
+                <Image
+                  src={client.logoUrl}
+                  alt={client.name}
+                  width={108}
+                  height={34}
+                  className="object-contain"
+                />
+              ) : (
+                <span className="text-sm text-[#1a1a1a]">{client.name}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+      </FadeUp>
     </section>
   );
 }
