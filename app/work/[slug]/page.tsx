@@ -265,7 +265,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {(opportunitiesCards || []).map((item, i) => (
                 <FadeUp key={item.key} delay={i * 70}>
-                  <div className="bg-[#fafaf9] p-7 h-full flex flex-col gap-5">
+                  <div className="bg-[#fafaf9] border border-[#e5eaeb] p-7 h-full flex flex-col gap-5">
                     <span className="text-xs text-[#6b7280] font-mono tracking-wider">
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -315,7 +315,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {(approachItems || []).map((item, i) => (
                 <FadeUp key={item._key} delay={i * 70}>
-                  <div className="bg-[#fafaf9] p-7 h-full flex flex-col gap-4">
+                  <div className="bg-[#fafaf9] border border-[#e5eaeb] p-7 h-full flex flex-col gap-4">
                     <span className="text-xs text-[#6b7280] font-mono tracking-wider">
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -354,7 +354,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {(impactCards || []).map((item, i) => (
                 <FadeUp key={item.key} delay={i * 70}>
-                  <div className="bg-[#fafaf9] p-8 h-full flex flex-col gap-5">
+                  <div className="bg-[#fafaf9] border border-[#e5eaeb] p-8 h-full flex flex-col gap-5">
                     <span className="text-xs text-[#6b7280] font-mono tracking-wider">
                       {String(i + 1).padStart(2, "0")}
                     </span>
