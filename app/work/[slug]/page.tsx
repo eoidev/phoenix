@@ -190,7 +190,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <h1 className="text-5xl md:text-6xl font-light text-[#1a1a1a] mb-6">{p.title}</h1>
             <p className="text-lg text-[#6b7280] leading-relaxed max-w-2xl mb-8">{p.description}</p>
             <div className="flex flex-wrap gap-2">
-              {p.tags.map((tag: string) => (
+              {(p.tags ?? []).map((tag: string) => (
                 <span key={tag} className="text-xs text-[#6b7280] border border-[#e5eaeb] px-3 py-1">
                   {tag}
                 </span>
