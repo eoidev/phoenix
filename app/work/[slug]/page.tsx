@@ -104,6 +104,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
     description?: string;
     tags?: string[];
     imageUrl?: string | null;
+    keyVisualUrl?: string | null;
     role?: Block[];
     opportunities?: Block[];
     approach?: ApproachItem[];
@@ -117,6 +118,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
   const description = sd?.description ?? fallback.description;
   const tags: string[] = sd?.tags ?? fallback.tags;
   const imageUrl = sd?.imageUrl ?? fallback.imageUrl;
+  const keyVisualUrl = sd?.keyVisualUrl ?? null;
 
   const roleParagraphs = sd?.role
     ? extractParagraphs(sd.role)
@@ -291,10 +293,19 @@ export default async function ProjectPage({ params }: { params: Params }) {
                   Where fans drive the show.
                 </h3>
               </div>
-              <div className="w-full max-w-3xl aspect-[16/9] bg-white/60 flex items-center justify-center">
-                <span className="text-4xl font-light text-[#1a1a1a]/15 select-none">
-                  Key visual
-                </span>
+              <div className="w-full max-w-3xl aspect-[16/9] bg-white/60 overflow-hidden relative flex items-center justify-center">
+                {keyVisualUrl ? (
+                  <Image
+                    src={keyVisualUrl}
+                    alt="Key visual"
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <span className="text-4xl font-light text-[#1a1a1a]/15 select-none">
+                    Key visual
+                  </span>
+                )}
               </div>
             </div>
           </FadeUp>
@@ -384,23 +395,21 @@ export default async function ProjectPage({ params }: { params: Params }) {
               </div>
             </FadeUp>
 
-            {/* Hero output frame */}
-            <FadeUp>
-              <div className="w-full aspect-[16/8] bg-[#f0ede8] mb-4 flex items-center justify-center">
-                <span className="text-4xl font-light text-[#1a1a1a]/15 select-none">
-                  Key screens
-                </span>
-              </div>
-            </FadeUp>
-
-            {/* 3-col sub-gallery */}
+            {/* 3-col screen gallery */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {[1, 2, 3].map((n, i) => (
-                <FadeUp key={n} delay={i * 80}>
-                  <div className="aspect-[4/5] bg-[#fafaf9] flex items-center justify-center">
-                    <span className="text-3xl font-light text-[#1a1a1a]/10 select-none">
-                      {String(n).padStart(2, "0")}
-                    </span>
+              {[
+                { src: "/tootoot-screen-1.jpg", alt: "Tootoot — Artist page with demand CTA" },
+                { src: "/tootoot-screen-2.jpg", alt: "Tootoot — Add your tootoot demand form" },
+                { src: "/tootoot-screen-3.jpg", alt: "Tootoot — Event detail with buy tickets" },
+              ].map((screen, i) => (
+                <FadeUp key={screen.src} delay={i * 80}>
+                  <div className="relative overflow-hidden bg-[#fafaf9]" style={{ aspectRatio: "373/765" }}>
+                    <Image
+                      src={screen.src}
+                      alt={screen.alt}
+                      fill
+                      className="object-cover object-top"
+                    />
                   </div>
                 </FadeUp>
               ))}
