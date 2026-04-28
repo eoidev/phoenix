@@ -317,7 +317,6 @@ export default async function ProjectPage({ params }: { params: Params }) {
                 {screens.map((screen) => (
                   <div key={screen.src} className="relative w-[241px] h-[430px] overflow-hidden shrink-0">
                     <Image src={screen.src} alt={screen.alt} fill className="object-cover" />
-                    <div className="absolute inset-0 bg-white/60" />
                   </div>
                 ))}
               </div>
