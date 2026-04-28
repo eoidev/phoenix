@@ -49,6 +49,13 @@ export const project = defineType({
       description: "Hero visual shown in the 'Platform concept' section",
     }),
     defineField({
+      name: "platformConceptText",
+      title: "Platform Concept — Description",
+      type: "text",
+      rows: 3,
+      description: "Short paragraph shown below the heading in the 'Platform concept' section",
+    }),
+    defineField({
       name: "order",
       title: "Order",
       type: "number",

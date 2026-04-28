@@ -105,6 +105,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
     tags?: string[];
     imageUrl?: string | null;
     keyVisualUrl?: string | null;
+    platformConceptText?: string | null;
     role?: Block[];
     opportunities?: Block[];
     approach?: ApproachItem[];
@@ -119,6 +120,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
   const tags: string[] = sd?.tags ?? fallback.tags;
   const imageUrl = sd?.imageUrl ?? fallback.imageUrl;
   const keyVisualUrl = sd?.keyVisualUrl ?? null;
+  const platformConceptText = sd?.platformConceptText ?? null;
 
   const roleParagraphs = sd?.role
     ? extractParagraphs(sd.role)
@@ -288,6 +290,11 @@ export default async function ProjectPage({ params }: { params: Params }) {
               <h3 className="text-4xl font-light text-[#1a1a1a] leading-[1.375]">
                 Where fans drive the show.
               </h3>
+              {platformConceptText && (
+                <p className="text-base text-[#6b7280] leading-relaxed max-w-xl">
+                  {platformConceptText}
+                </p>
+              )}
               <div className="relative w-full max-w-[713px] aspect-[3/2] overflow-hidden">
                 {keyVisualUrl ? (
                   <Image
