@@ -281,33 +281,41 @@ export default async function ProjectPage({ params }: { params: Params }) {
         </section>
 
         {/* ── Visual showcase ── */}
-        <section className="bg-white border-t border-b border-[#e5eaeb] py-28">
+        <section className="relative py-28 overflow-hidden">
+          {/* Background: concert image or dark fallback */}
+          {keyVisualUrl ? (
+            <div className="absolute inset-0">
+              <Image src={keyVisualUrl} alt="" fill className="object-cover" />
+            </div>
+          ) : (
+            <div className="absolute inset-0 bg-[#1a1a1a]" />
+          )}
+
           <FadeUp>
-            <div className="flex flex-col items-center text-center gap-6">
-              <p className="text-xs uppercase tracking-[1.2px] text-[#6b7280]">
+            <div className="relative flex flex-col items-center text-center gap-6 px-6">
+              <p className="text-xs uppercase tracking-[1.2px] text-white/60">
                 Platform concept
               </p>
-              <h3 className="text-4xl font-light text-[#1a1a1a] leading-[1.375]">
+              <h3 className="text-4xl font-light text-white leading-[1.375]">
                 Where fans drive the show.
               </h3>
               {platformConceptText && (
-                <p className="text-base text-[#6b7280] leading-relaxed max-w-xl">
+                <p className="text-lg text-white leading-relaxed max-w-2xl">
                   {platformConceptText}
                 </p>
               )}
-              <div className="relative w-full max-w-[713px] aspect-[3/2] overflow-hidden">
-                {keyVisualUrl ? (
-                  <Image
-                    src={keyVisualUrl}
-                    alt="Key visual"
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-[#1a1a1a]/10 flex items-center justify-center">
-                    <span className="text-2xl font-light text-[#1a1a1a]/20 select-none">Key visual</span>
+              {/* 3 phone screenshots */}
+              <div className="flex flex-col sm:flex-row gap-6 mt-2">
+                {[
+                  { src: "/tootoot-screen-1.jpg", alt: "Tootoot screen 1" },
+                  { src: "/tootoot-screen-2.jpg", alt: "Tootoot screen 2" },
+                  { src: "/tootoot-screen-3.jpg", alt: "Tootoot screen 3" },
+                ].map((screen) => (
+                  <div key={screen.src} className="relative w-[241px] h-[430px] overflow-hidden shrink-0">
+                    <Image src={screen.src} alt={screen.alt} fill className="object-cover" />
+                    <div className="absolute inset-0 bg-white/60" />
                   </div>
-                )}
+                ))}
               </div>
             </div>
           </FadeUp>
