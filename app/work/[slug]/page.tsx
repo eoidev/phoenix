@@ -293,7 +293,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
           {/* Background: concert image or dark fallback */}
           {keyVisualUrl ? (
             <div className="absolute inset-0">
-              <Image src={keyVisualUrl} alt="" fill className="object-cover" />
+              <Image src={keyVisualUrl} alt="" fill sizes="100vw" className="object-cover object-center" priority />
             </div>
           ) : (
             <div className="absolute inset-0 bg-[#1a1a1a]" />
