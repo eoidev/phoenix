@@ -290,15 +290,12 @@ export default async function ProjectPage({ params }: { params: Params }) {
               </h3>
               <div className="relative w-full max-w-[713px] aspect-[3/2] overflow-hidden">
                 {keyVisualUrl ? (
-                  <>
-                    <Image
-                      src={keyVisualUrl}
-                      alt="Key visual"
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-white/60" />
-                  </>
+                  <Image
+                    src={keyVisualUrl}
+                    alt="Key visual"
+                    fill
+                    className="object-cover"
+                  />
                 ) : (
                   <div className="w-full h-full bg-[#1a1a1a]/10 flex items-center justify-center">
                     <span className="text-2xl font-light text-[#1a1a1a]/20 select-none">Key visual</span>
