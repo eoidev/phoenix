@@ -164,49 +164,46 @@ export default async function ProjectPage({ params }: { params: Params }) {
       <main className="pt-20">
 
         {/* ── Hero ── */}
-        <section className="max-w-6xl mx-auto px-6 pt-20 pb-20">
-          <FadeUp>
-            <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-12 md:gap-20 items-end">
-              {/* Left: text */}
-              <div>
-                <p className="text-xs uppercase tracking-widest text-[#6b7280] mb-5">
-                  {category}
-                </p>
-                <h1 className="text-5xl md:text-6xl font-light text-[#1a1a1a] leading-[1.05] tracking-tight mb-6">
-                  {title}
-                </h1>
-                <p className="text-lg text-[#6b7280] leading-relaxed max-w-xl mb-8">
-                  {description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {(tags || []).map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs text-[#6b7280] border border-[#e5eaeb] px-3 py-1.5"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+        <section className="pt-32 md:pt-52 pb-20">
+          <div className="max-w-6xl mx-auto px-6">
+            <FadeUp>
+              <div className="flex flex-col md:flex-row items-end justify-between gap-12">
+                {/* Left: text */}
+                <div className="flex flex-col gap-5 md:w-[480px]">
+                  <p className="text-xs uppercase tracking-[1.2px] text-[#6b7280]">
+                    {category}
+                  </p>
+                  <h1 className="text-7xl md:text-8xl font-light text-[#1a1a1a] leading-[1.05] tracking-tight">
+                    {title}
+                  </h1>
+                  <p className="text-lg text-[#6b7280] leading-relaxed">
+                    {description}
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    {(tags || []).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-sm text-[#6b7280] bg-white border border-[#e5eaeb] px-3 py-[7px] leading-5"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right: cover image card — uses CMS imageUrl when available */}
+                <div className="shrink-0 relative w-96 h-72 overflow-hidden">
+                  {imageUrl ? (
+                    <Image src={imageUrl} alt={title} fill className="object-cover" />
+                  ) : (
+                    <div className="w-full h-full bg-white flex items-center justify-center p-10">
+                      <img src="/tootoot-logo.svg" alt={title} className="w-full h-auto" />
+                    </div>
+                  )}
                 </div>
               </div>
-
-              {/* Right: cover image or placeholder */}
-              <div className="aspect-[3/4] bg-[#f0ede8] overflow-hidden relative flex items-center justify-center">
-                {imageUrl ? (
-                  <Image
-                    src={imageUrl}
-                    alt={title}
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  <span className="text-7xl font-light text-[#1a1a1a]/10 select-none">
-                    01
-                  </span>
-                )}
-              </div>
-            </div>
-          </FadeUp>
+            </FadeUp>
+          </div>
         </section>
 
         {/* ── Section anchor nav ── */}
@@ -282,29 +279,30 @@ export default async function ProjectPage({ params }: { params: Params }) {
         </section>
 
         {/* ── Visual showcase ── */}
-        <section className="bg-[#f0ede8] py-32 mt-16">
+        <section className="bg-white border-t border-b border-[#e5eaeb] py-28">
           <FadeUp>
-            <div className="max-w-6xl mx-auto px-6 flex flex-col items-center text-center gap-10">
-              <div>
-                <p className="text-xs uppercase tracking-widest text-[#6b7280] mb-4">
-                  Platform concept
-                </p>
-                <h3 className="text-4xl md:text-5xl font-light text-[#1a1a1a]">
-                  Where fans drive the show.
-                </h3>
-              </div>
-              <div className="w-full max-w-3xl aspect-[16/9] bg-white/60 overflow-hidden relative flex items-center justify-center">
+            <div className="flex flex-col items-center text-center gap-6">
+              <p className="text-xs uppercase tracking-[1.2px] text-[#6b7280]">
+                Platform concept
+              </p>
+              <h3 className="text-4xl font-light text-[#1a1a1a] leading-[1.375]">
+                Where fans drive the show.
+              </h3>
+              <div className="relative w-full max-w-[713px] aspect-[3/2] overflow-hidden">
                 {keyVisualUrl ? (
-                  <Image
-                    src={keyVisualUrl}
-                    alt="Key visual"
-                    fill
-                    className="object-cover"
-                  />
+                  <>
+                    <Image
+                      src={keyVisualUrl}
+                      alt="Key visual"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-white/60" />
+                  </>
                 ) : (
-                  <span className="text-4xl font-light text-[#1a1a1a]/15 select-none">
-                    Key visual
-                  </span>
+                  <div className="w-full h-full bg-[#1a1a1a]/10 flex items-center justify-center">
+                    <span className="text-2xl font-light text-[#1a1a1a]/20 select-none">Key visual</span>
+                  </div>
                 )}
               </div>
             </div>

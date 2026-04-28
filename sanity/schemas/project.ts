@@ -42,6 +42,13 @@ export const project = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: "keyVisual",
+      title: "Key Visual",
+      type: "image",
+      options: { hotspot: true },
+      description: "Hero visual shown in the 'Platform concept' section",
+    }),
+    defineField({
       name: "order",
       title: "Order",
       type: "number",

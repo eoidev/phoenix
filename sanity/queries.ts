@@ -39,6 +39,7 @@ export async function getProjectBySlug(slug: string) {
       description,
       tags,
       "imageUrl": image.asset->url,
+      "keyVisualUrl": keyVisual.asset->url,
       role,
       opportunities,
       approach,
