@@ -106,6 +106,9 @@ export default async function ProjectPage({ params }: { params: Params }) {
     imageUrl?: string | null;
     keyVisualUrl?: string | null;
     platformConceptText?: string | null;
+    screen1Url?: string | null;
+    screen2Url?: string | null;
+    screen3Url?: string | null;
     role?: Block[];
     opportunities?: Block[];
     approach?: ApproachItem[];
@@ -121,6 +124,11 @@ export default async function ProjectPage({ params }: { params: Params }) {
   const imageUrl = sd?.imageUrl ?? fallback.imageUrl;
   const keyVisualUrl = sd?.keyVisualUrl ?? null;
   const platformConceptText = sd?.platformConceptText ?? null;
+  const screens = [
+    { src: sd?.screen1Url ?? "/tootoot-screen-1.jpg", alt: "Tootoot screen 1" },
+    { src: sd?.screen2Url ?? "/tootoot-screen-2.jpg", alt: "Tootoot screen 2" },
+    { src: sd?.screen3Url ?? "/tootoot-screen-3.jpg", alt: "Tootoot screen 3" },
+  ];
 
   const roleParagraphs = sd?.role
     ? extractParagraphs(sd.role)
@@ -306,11 +314,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
               )}
               {/* 3 phone screenshots */}
               <div className="flex flex-col sm:flex-row gap-6 mt-2">
-                {[
-                  { src: "/tootoot-screen-1.jpg", alt: "Tootoot screen 1" },
-                  { src: "/tootoot-screen-2.jpg", alt: "Tootoot screen 2" },
-                  { src: "/tootoot-screen-3.jpg", alt: "Tootoot screen 3" },
-                ].map((screen) => (
+                {screens.map((screen) => (
                   <div key={screen.src} className="relative w-[241px] h-[430px] overflow-hidden shrink-0">
                     <Image src={screen.src} alt={screen.alt} fill className="object-cover" />
                     <div className="absolute inset-0 bg-white/60" />

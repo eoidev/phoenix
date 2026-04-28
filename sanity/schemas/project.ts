@@ -56,6 +56,24 @@ export const project = defineType({
       description: "Short paragraph shown below the heading in the 'Platform concept' section",
     }),
     defineField({
+      name: "screen1",
+      title: "Platform Concept — Screen 1",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "screen2",
+      title: "Platform Concept — Screen 2",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "screen3",
+      title: "Platform Concept — Screen 3",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
       name: "order",
       title: "Order",
       type: "number",
