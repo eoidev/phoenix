@@ -17,7 +17,7 @@ type Block = {
   children?: { _key: string; text: string; marks?: string[] }[];
 };
 
-type ApproachItem = { _key: string; title: string; body: string };
+type ApproachItem = { _key: string; title: string; body: string; detail?: string; imageUrl?: string };
 type CardItem = { key: string; body: string };
 
 // ─── Block helpers ─────────────────────────────────────────────────────────────
@@ -64,11 +64,36 @@ const fallback = {
     { key: "o4", body: "Creating a clear and engaging discovery experience across cities, artists, and events" },
   ] as CardItem[],
   approach: [
-    { _key: "1", title: "Simplified user flows", body: "I designed clear pathways for key actions such as discovering events, expressing interest, and tracking demand — reducing friction in a relatively unfamiliar concept." },
-    { _key: "2", title: "Visual hierarchy & dark UI system", body: "I created a modern interface aligned with the music and events domain, using contrast and spacing to guide attention and highlight key actions." },
-    { _key: "3", title: "System thinking", body: "Instead of designing isolated screens, I focused on building a coherent system of components and patterns, ensuring consistency across the platform." },
-    { _key: "4", title: "Bridging exploration and action", body: "Special attention was given to connecting browsing behavior (exploring artists/events) with meaningful actions (supporting or attending events)." },
-    { _key: "5", title: "Design for uncertainty", body: "I explored ways to communicate event status, demand levels, and progress clearly — helping users understand where they are in the journey." },
+    {
+      _key: "1",
+      title: "Simplified user flows",
+      body: "I designed clear pathways for key actions such as discovering events, expressing interest, and tracking demand — reducing friction in a relatively unfamiliar concept.",
+      detail: "Starting from user research findings, I mapped out the core journeys — discovering an artist, expressing demand, and tracking progress toward a confirmed event. Each flow was stress-tested against edge cases: what happens when demand stalls? When an event gets cancelled? I ran two rounds of flow reviews with stakeholders, cutting unnecessary steps and consolidating screens wherever the mental model allowed. The result was a set of tight, predictable flows that required minimal onboarding.",
+    },
+    {
+      _key: "2",
+      title: "Visual hierarchy & dark UI system",
+      body: "I created a modern interface aligned with the music and events domain, using contrast and spacing to guide attention and highlight key actions.",
+      detail: "I chose a dark-first palette anchored in deep blacks and warm accents — deliberate references to the venue and live music world. Typography was set at a generous scale to create energy on the screen, with a strict hierarchy: primary actions always the largest and brightest element in view. Every component was built with a contrast-first mindset, ensuring readability under various ambient lighting conditions — important for a product used in real-world event contexts.",
+    },
+    {
+      _key: "3",
+      title: "System thinking",
+      body: "Instead of designing isolated screens, I focused on building a coherent system of components and patterns, ensuring consistency across the platform.",
+      detail: "Rather than designing page by page, I built a shared component library from the first sprint — buttons, cards, status indicators, navigation patterns. This meant that as new screens were added, they assembled from proven pieces rather than reinventing solutions. It also dramatically reduced handoff complexity: engineers had a single source of truth for every interactive state, spacing rule, and colour token. The system was documented directly in Figma with annotated variants and usage notes.",
+    },
+    {
+      _key: "4",
+      title: "Bridging exploration and action",
+      body: "Special attention was given to connecting browsing behavior (exploring artists/events) with meaningful actions (supporting or attending events).",
+      detail: "A key tension in the product was the gap between passive discovery (scrolling artists and cities) and active participation (adding a tootoot, inviting friends). I introduced persistent contextual CTAs that surfaced at natural pause points in the browsing experience, without feeling interruptive. Progress indicators on artist pages showed how close an event was to being confirmed, creating a low-effort but emotionally resonant nudge to take action.",
+    },
+    {
+      _key: "5",
+      title: "Design for uncertainty",
+      body: "I explored ways to communicate event status, demand levels, and progress clearly — helping users understand where they are in the journey.",
+      detail: "The biggest design challenge was helping users understand and trust a product where the main promise — a confirmed event — might never materialise. I developed a clear status system with four states (Gathering demand, Almost there, Confirmed, and Closed) each with distinct visual language and microcopy. Tone of voice played a critical role: language was kept optimistic and community-framed rather than transactional, reducing the perceived risk of participating in an unconfirmed event.",
+    },
   ] as ApproachItem[],
   impactIntro:
     "The result was a cohesive product experience that made a complex, non-traditional concept more understandable and engaging for users.",
@@ -349,6 +374,44 @@ export default async function ProjectPage({ params }: { params: Params }) {
                     <p className="text-sm text-[#6b7280] leading-relaxed">
                       {item.body}
                     </p>
+                  </div>
+                </FadeUp>
+              ))}
+            </div>
+
+            {/* ── Deep dive ── */}
+            <div className="mt-24 flex flex-col divide-y divide-[#e5eaeb]">
+              {(approachItems || []).filter(item => item.detail).map((item, i) => (
+                <FadeUp key={item._key}>
+                  <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-x-20 gap-y-8 py-16">
+                    {/* Left: label + title + detail */}
+                    <div className="flex flex-col gap-5">
+                      <span className="text-xs text-[#6b7280] font-mono tracking-wider">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="text-2xl font-light text-[#1a1a1a]">
+                        {item.title}
+                      </h3>
+                      <p className="text-[#6b7280] leading-relaxed">
+                        {item.detail}
+                      </p>
+                    </div>
+
+                    {/* Right: artifact image or placeholder */}
+                    <div className="w-full aspect-[4/3] bg-[#f0ede8] flex items-center justify-center overflow-hidden relative">
+                      {item.imageUrl ? (
+                        <Image
+                          src={item.imageUrl}
+                          alt={item.title}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <span className="text-xs text-[#1a1a1a]/20 tracking-widest uppercase select-none">
+                          Artifact / Screenshot
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </FadeUp>
               ))}
