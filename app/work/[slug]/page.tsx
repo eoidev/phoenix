@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import FadeUp from "../../components/FadeUp";
+import ApproachDeepDive from "../../components/ApproachDeepDive";
 import Footer from "../../components/Footer";
 import { getProjectBySlug } from "../../../sanity/queries";
 
@@ -361,61 +362,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
               </div>
             </FadeUp>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {(approachItems || []).map((item, i) => (
-                <FadeUp key={item._key} delay={i * 70}>
-                  <div className="bg-[#fafaf9] p-7 h-full flex flex-col gap-4">
-                    <span className="text-xs text-[#6b7280] font-mono tracking-wider">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="text-base font-medium text-[#1a1a1a]">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-[#6b7280] leading-relaxed">
-                      {item.body}
-                    </p>
-                  </div>
-                </FadeUp>
-              ))}
-            </div>
-
-            {/* ── Deep dive ── */}
-            <div className="mt-24 flex flex-col divide-y divide-[#e5eaeb]">
-              {(approachItems || []).filter(item => item.detail).map((item, i) => (
-                <FadeUp key={item._key}>
-                  <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-x-20 gap-y-8 py-16">
-                    {/* Left: label + title + detail */}
-                    <div className="flex flex-col gap-5">
-                      <span className="text-xs text-[#6b7280] font-mono tracking-wider">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <h3 className="text-2xl font-light text-[#1a1a1a]">
-                        {item.title}
-                      </h3>
-                      <p className="text-[#6b7280] leading-relaxed">
-                        {item.detail}
-                      </p>
-                    </div>
-
-                    {/* Right: artifact image or placeholder */}
-                    <div className="w-full aspect-[4/3] bg-[#f0ede8] flex items-center justify-center overflow-hidden relative">
-                      {item.imageUrl ? (
-                        <Image
-                          src={item.imageUrl}
-                          alt={item.title}
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <span className="text-xs text-[#1a1a1a]/20 tracking-widest uppercase select-none">
-                          Artifact / Screenshot
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </FadeUp>
-              ))}
-            </div>
+            <ApproachDeepDive items={fallback.approach} />
           </div>
         </section>
 
