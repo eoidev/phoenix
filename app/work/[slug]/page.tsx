@@ -333,8 +333,25 @@ export default async function ProjectPage({ params }: { params: Params }) {
               <h3 className="text-4xl font-light text-white leading-[1.375]">
                 Where fans drive the show.
               </h3>
+              {/* Stats bar */}
+              <div className="w-full max-w-4xl border-t border-white/10 mt-4 pt-8">
+                <div className="grid grid-cols-3 gap-8">
+                  <div>
+                    <p className="text-3xl md:text-4xl font-light text-white">+30%</p>
+                    <p className="text-sm text-white/60 mt-1">increased artist income</p>
+                  </div>
+                  <div>
+                    <p className="text-3xl md:text-4xl font-light text-white">70%</p>
+                    <p className="text-sm text-white/60 mt-1">vote-to-ticket</p>
+                  </div>
+                  <div>
+                    <p className="text-3xl md:text-4xl font-light text-white">90%</p>
+                    <p className="text-sm text-white/60 mt-1">revenue from live</p>
+                  </div>
+                </div>
+              </div>
               {platformConceptText && (
-                <p className="text-lg text-white leading-relaxed max-w-2xl">
+                <p className="text-lg text-white leading-relaxed max-w-2xl mt-4">
                   {platformConceptText}
                 </p>
               )}
