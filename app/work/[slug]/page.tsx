@@ -18,7 +18,7 @@ type Block = {
   children?: { _key: string; text: string; marks?: string[] }[];
 };
 
-type ApproachItem = { _key: string; title: string; body: string; detail?: string; imageUrl?: string };
+type ApproachItem = { _key: string; title: string; body: string; detail?: string; imageUrl?: string; images?: string[] };
 type CardItem = { key: string; body: string };
 
 // ─── Block helpers ─────────────────────────────────────────────────────────────
