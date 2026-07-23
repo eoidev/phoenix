@@ -319,7 +319,8 @@ export default async function ProjectPage({ params }: { params: Params }) {
           {/* Background: concert image or dark fallback */}
           {keyVisualUrl ? (
             <div className="absolute inset-0">
-              <Image src={keyVisualUrl} alt="" fill sizes="100vw" quality={100} className="object-cover object-center" priority />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={keyVisualUrl} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
             </div>
           ) : (
             <div className="absolute inset-0 bg-[#1a1a1a]" />
