@@ -106,6 +106,14 @@ export const project = defineType({
           fields: [
             defineField({ name: "title", title: "Title", type: "string" }),
             defineField({ name: "body", title: "Body", type: "text", rows: 3 }),
+            defineField({ name: "detail", title: "Detail (expanded)", type: "text", rows: 6, description: "Longer text shown in the expanded modal view" }),
+            defineField({
+              name: "images",
+              title: "Screenshots",
+              type: "array",
+              of: [{ type: "image", options: { hotspot: true } }],
+              description: "App screenshots shown below the text in the modal",
+            }),
           ],
           preview: { select: { title: "title" } },
         },

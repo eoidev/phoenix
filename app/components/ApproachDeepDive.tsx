@@ -9,6 +9,7 @@ type ApproachItem = {
   body: string;
   detail?: string;
   imageUrl?: string;
+  images?: string[];
 };
 
 function TiltCard({
@@ -132,15 +133,25 @@ export default function ApproachDeepDive({ items }: { items: ApproachItem[] }) {
                 </div>
               </div>
 
-              <div className="w-full aspect-[16/9] bg-[#f0ede8] rounded-xl overflow-hidden flex items-center justify-center relative">
-                {active.imageUrl ? (
+              {(active.images && active.images.length > 0) ? (
+                <div className="flex gap-4 justify-center">
+                  {active.images.map((url, i) => (
+                    <div key={i} className="relative w-[220px] h-[420px] rounded-xl overflow-hidden shrink-0 bg-[#f0ede8]">
+                      <Image src={url} alt={`${active.title} screenshot ${i + 1}`} fill className="object-cover" />
+                    </div>
+                  ))}
+                </div>
+              ) : active.imageUrl ? (
+                <div className="w-full aspect-[16/9] bg-[#f0ede8] rounded-xl overflow-hidden relative">
                   <Image src={active.imageUrl} alt={active.title} fill className="object-cover" />
-                ) : (
+                </div>
+              ) : (
+                <div className="w-full aspect-[16/9] bg-[#f0ede8] rounded-xl overflow-hidden flex items-center justify-center">
                   <span className="text-xs text-[#1a1a1a]/20 tracking-widest uppercase select-none">
                     Artifact / Screenshot
                   </span>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

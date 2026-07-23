@@ -46,7 +46,7 @@ export async function getProjectBySlug(slug: string) {
       "screen3Url": screen3.asset->url,
       role,
       opportunities,
-      approach,
+      "approach": approach[] { _key, title, body, detail, "images": images[].asset->url },
       impact,
       reflection
     }`,
