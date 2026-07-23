@@ -380,7 +380,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
               </div>
             </FadeUp>
 
-            <ApproachDeepDive items={fallback.approach} />
+            <ApproachDeepDive items={approachItems} />
           </div>
         </section>
 
