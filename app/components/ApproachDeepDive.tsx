@@ -105,49 +105,49 @@ export default function ApproachDeepDive({ items }: { items: ApproachItem[] }) {
 
       {active && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/30 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/30"
           onClick={() => setActive(null)}
         >
           <div
-            className="relative bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            className="bg-white w-full max-w-[960px] max-h-[90vh] overflow-y-auto p-6 flex flex-col gap-2 items-end shadow-[0px_24px_48px_0px_rgba(0,0,0,0.2)]"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              className="absolute top-5 right-5 w-9 h-9 bg-[#f3f4f6] rounded-lg flex items-center justify-center text-[#1a1a1a] hover:bg-[#e5e7eb] transition-colors z-10"
+              className="shrink-0 size-8 flex items-center justify-center text-[#1a1a1a] hover:opacity-60 transition-opacity"
               onClick={() => setActive(null)}
               aria-label="Close"
             >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M1 1L23 23M23 1L1 23" stroke="currentColor" strokeWidth="1.5" />
               </svg>
             </button>
 
-            <div className="p-10 flex flex-col gap-10">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="flex flex-col gap-4">
-                  <h2 className="text-3xl font-semibold text-[#1a1a1a]">{active.title}</h2>
-                  <p className="text-[#6b7280] leading-relaxed">{active.body}</p>
+            <div className="w-full p-4 flex flex-col gap-10">
+              <div className="flex flex-col md:flex-row md:justify-between gap-8">
+                <div className="flex flex-col gap-4 md:w-[420px]">
+                  <h2 className="text-3xl font-light leading-9 text-[#1a1a1a]">{active.title}</h2>
+                  <p className="text-base font-normal leading-[26px] text-[#6b7280]">{active.body}</p>
                 </div>
-                <div>
-                  <p className="text-[#1a1a1a] leading-relaxed">{active.detail}</p>
+                <div className="md:w-[420px]">
+                  <p className="text-base font-normal leading-[26px] text-[#1a1a1a]">{active.detail}</p>
                 </div>
               </div>
 
               {(active.images && active.images.length > 0) ? (
                 <div className="flex gap-4 justify-center">
                   {active.images.map((url, i) => (
-                    <div key={i} className="relative w-[220px] h-[420px] rounded-xl overflow-hidden shrink-0 bg-[#f0ede8]">
+                    <div key={i} className="relative w-[220px] h-[420px] overflow-hidden shrink-0 bg-[#f0ede8]">
                       <Image src={url} alt={`${active.title} screenshot ${i + 1}`} fill className="object-cover" />
                     </div>
                   ))}
                 </div>
               ) : active.imageUrl ? (
-                <div className="w-full aspect-[16/9] bg-[#f0ede8] rounded-xl overflow-hidden relative">
+                <div className="w-full h-[280px] bg-[#f0ede8] overflow-hidden relative">
                   <Image src={active.imageUrl} alt={active.title} fill className="object-cover" />
                 </div>
               ) : (
-                <div className="w-full aspect-[16/9] bg-[#f0ede8] rounded-xl overflow-hidden flex items-center justify-center">
-                  <span className="text-xs text-[#1a1a1a]/20 tracking-widest uppercase select-none">
+                <div className="w-full h-[280px] bg-[#f0ede8] overflow-hidden flex items-center justify-center">
+                  <span className="text-xs font-normal leading-4 tracking-[1.2px] text-[#1a1a1a]/20 uppercase select-none">
                     Artifact / Screenshot
                   </span>
                 </div>
