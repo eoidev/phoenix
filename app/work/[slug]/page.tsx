@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import FadeUp from "../../components/FadeUp";
-import ApproachDeepDive from "../../components/ApproachDeepDive";
+import ApproachDeepDive, { type DeepDive } from "../../components/ApproachDeepDive";
 import Footer from "../../components/Footer";
 import { getProjectBySlug } from "../../../sanity/queries";
 
@@ -18,8 +18,49 @@ type Block = {
   children?: { _key: string; text: string; marks?: string[] }[];
 };
 
-type ApproachItem = { _key: string; title: string; body: string; detail?: string; imageUrl?: string };
+type ApproachItem = { _key: string; title: string; body: string; detail?: string; imageUrl?: string; deepDive?: DeepDive };
 type CardItem = { key: string; body: string };
+
+// Deep-dive content for the first Approach card ("Simplified user flows").
+// Attached to card index 0 below so it opens the rich case-study modal.
+const SIMPLIFIED_FLOWS_DEEP_DIVE: DeepDive = {
+  goals: [
+    "Make an unconfirmed event feel concrete",
+    "Turn interest into a measurable commitment",
+    "Show progress toward a real date at a glance",
+    "Keep fans informed when demand stalls or an event is cancelled",
+  ],
+  heroImage: "/tootoot/dd-hero-phone.png",
+  stat: { value: "70%", label: "vote-to-ticket rate" },
+  statImage: "/tootoot/dd-stat-foofighters.png",
+  highlights: [
+    "Three core journeys mapped end to end from research — discovery, demand, and confirmation.",
+    "Stress-tested against stalled demand and cancelled events, so uncertainty never feels like risk.",
+    "Steps cut and screens consolidated over two review rounds — tight flows, minimal onboarding.",
+  ],
+  flow: [
+    {
+      title: "Trending",
+      body: "See where momentum is building — a live ranking of the artists and cities closest to turning demand into a real date.",
+      image: "/tootoot/dd-flow-trending.png",
+    },
+    {
+      title: "Artist page",
+      body: "Make invisible demand visible. A live map shows where fans want the artist, while clear messaging explains that no show is booked and nothing is charged yet.",
+      image: "/tootoot/dd-flow-artist.png",
+    },
+    {
+      title: "Add your tootoot",
+      body: "Ask for a concert in under a minute. Fans pick the city, timing, number of tickets and a fair price, and see how their tootoot moves the city toward its target.",
+      image: "/tootoot/dd-flow-addtootoot.png",
+    },
+  ],
+  quote: {
+    text: "“We're building a community of people who love going to concerts.”",
+    author: "Michal Švihra",
+    role: "co-founder of Tootoot",
+  },
+};
 
 // ─── Block helpers ─────────────────────────────────────────────────────────────
 
@@ -167,7 +208,9 @@ export default async function ProjectPage({ params }: { params: Params }) {
     ? extractBullets(sd.opportunities)
     : fallback.opportunitiesCards;
 
-  const approachItems: ApproachItem[] = sd?.approach ?? fallback.approach;
+  const approachItems: ApproachItem[] = (sd?.approach ?? fallback.approach).map(
+    (item, i) => (i === 0 ? { ...item, deepDive: SIMPLIFIED_FLOWS_DEEP_DIVE } : item)
+  );
 
   const impactIntro = sd?.impact
     ? extractParagraphs(sd.impact).join(" ")
@@ -362,7 +405,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
               </div>
             </FadeUp>
 
-            <ApproachDeepDive items={fallback.approach} />
+            <ApproachDeepDive items={approachItems} />
           </div>
         </section>
 
