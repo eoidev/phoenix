@@ -30,7 +30,7 @@ const SIMPLIFIED_FLOWS_DEEP_DIVE: DeepDive = {
     "Show progress toward a real date at a glance",
     "Keep fans informed when demand stalls or an event is cancelled",
   ],
-  heroImage: "/tootoot/dd-hero-phone.png",
+  heroImage: "/tootoot/dd-hero-phone-v2.png",
   stat: { value: "70%", label: "vote-to-ticket rate" },
   statImage: "/tootoot/dd-stat-foofighters.png",
   highlights: [
@@ -42,17 +42,17 @@ const SIMPLIFIED_FLOWS_DEEP_DIVE: DeepDive = {
     {
       title: "Trending",
       body: "See where momentum is building — a live ranking of the artists and cities closest to turning demand into a real date.",
-      image: "/tootoot/dd-flow-trending.png",
+      image: "/tootoot/dd-flow-trending-v2.png",
     },
     {
       title: "Artist page",
       body: "Make invisible demand visible. A live map shows where fans want the artist, while clear messaging explains that no show is booked and nothing is charged yet.",
-      image: "/tootoot/dd-flow-artist.png",
+      image: "/tootoot/dd-flow-artist-v2.png",
     },
     {
       title: "Add your tootoot",
       body: "Ask for a concert in under a minute. Fans pick the city, timing, number of tickets and a fair price, and see how their tootoot moves the city toward its target.",
-      image: "/tootoot/dd-flow-addtootoot.png",
+      image: "/tootoot/dd-flow-addtootoot-v2.png",
     },
   ],
   quote: {
